@@ -10,7 +10,7 @@ TagManager:
   - PlayerBullet
   - Zombie
   - HeadCollider
-  - BodyCollider
+  - Stick
   layers:
   - Default
   - TransparentFX

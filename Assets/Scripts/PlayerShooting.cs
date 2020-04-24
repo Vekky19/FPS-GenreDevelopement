@@ -38,7 +38,7 @@ public class PlayerShooting : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, bulletRange) && hit.collider.tag == "Zombie")
         {
 
-            GameObject impactObject = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            GameObject impactObject = Instantiate(impactEffect, hit.point, Quaternion.identity);
             Destroy(impactObject, 3f);
 
             hit.collider.GetComponent<ZombieHealth>().TakeDamage(bulletDamage);

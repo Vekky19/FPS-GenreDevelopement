@@ -6,9 +6,9 @@ public class AmmoPickup : MonoBehaviour
 {
     public ParticleSystem pickupEffect;
 
-    Vector3 start;
-    Vector3 pos1;
-    Vector3 pos2;
+    Transform ammo;
+    Vector3 ogPOS;
+    float ammoSpeed = 1f;
 
     public float rotateSpeed = 3f;
 
@@ -19,6 +19,7 @@ public class AmmoPickup : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             pickupEffect.Play();
             PlayerHandler.Instance.AddAmmo(30);
             collision.GetComponent<PlayerShooting>().UpdateAmmoText();
@@ -26,26 +27,29 @@ public class AmmoPickup : MonoBehaviour
         }
     }
 
+    void MoveAmmo()
+    {
+        ammo.transform.position = new Vector3(ammo.transform.position.x, ammo.transform.position.y + ammoSpeed * Time.deltaTime, ammo.transform.position.z);
+        if (ammo.transform.position.y > ogPOS.y + 1)
+        {
+            ammoSpeed = -ammoSpeed;
+        }
+        if (ammo.transform.position.y < ogPOS.y)
+        {
+            ammoSpeed = -ammoSpeed;
+        }
+    }
+
     private void Start()
     {
         pickupEffect = GetComponent<ParticleSystem>();
-        start = this.transform.position;
-        pos1 = new Vector3(start.x, 1, start.z);
-        pos2 = new Vector3(start.x, 1.5f, start.z);
+        ammo = GetComponent<Transform>();
+        ogPOS = ammo.position;
         Destroy(this.gameObject, 30);
     }
 
     private void Update()
     {
-        this.transform.rotation = new Quaternion(this.transform.rotation.x, this.transform.rotation.y + rotateSpeed, this.transform.rotation.z, 0);
-
-        if (this.transform.position.y < pos1.y && this.transform.position.y < pos2.y)
-        {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + moveSpeed, this.transform.position.z);
-        }
-        else if (this.transform.position.y >= pos2.y && this.transform.position.y >= pos1.y)
-        {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - moveSpeed, this.transform.position.z);
-        }
+        MoveAmmo();
     }
 }

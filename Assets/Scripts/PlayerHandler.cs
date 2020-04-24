@@ -14,6 +14,33 @@ public class PlayerHandler : MonoBehaviour
     public int totalAmmo = 90;
     public int zombieKills = 0;
 
+    public int sticks = 0;
+
+    public Dictionary<string, bool> Tasks;
+
+    void Start()
+    {
+        Instance = this;
+        Tasks = new Dictionary<string, bool>();
+        Tasks.Add("Fire", false);
+    }
+
+    public void CompleteTask(string task)
+    {
+        Tasks[task] = true;
+        Debug.Log("Task Completed: " + task);
+    }
+
+    public void AddStick()
+    {
+        sticks += 1;
+    }
+
+    public void RemoveStick()
+    {
+        sticks -= 1;
+    }
+
     public void AddKill()
     {
         zombieKills += 1;
@@ -37,11 +64,6 @@ public class PlayerHandler : MonoBehaviour
     public void PlayerDie()
     {
         SceneManager.LoadScene("GameOver");
-    }
-
-    void Start()
-    {
-        Instance = this;
     }
 
     void Update()

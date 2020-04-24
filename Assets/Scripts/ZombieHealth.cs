@@ -23,6 +23,8 @@ public class ZombieHealth : MonoBehaviour
             Instantiate(AmmoPrefab, this.transform.position, Quaternion.identity);
         }
 
+        PlayerHandler.Instance.AddKill();
+
         Destroy(this.gameObject);
     }
 
