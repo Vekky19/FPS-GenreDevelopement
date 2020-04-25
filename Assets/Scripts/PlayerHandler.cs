@@ -61,6 +61,18 @@ public class PlayerHandler : MonoBehaviour
         HP -= damage;
     }
 
+    public void AddHealth(float heal)
+    {
+        if (HP + heal > 100)
+        {
+            AddHealth(heal - 1);
+        }
+        else
+        {
+            HP += heal;
+        }
+    }
+
     public void PlayerDie()
     {
         SceneManager.LoadScene("GameOver");
