@@ -12,7 +12,7 @@ public class PlayerHandler : MonoBehaviour
 
     public float HP = 100f;
     public int totalAmmo = 90;
-    public int zombieKills = 0;
+    //public int zombieKills = 0;
 
     public int sticks = 0;
     public int batterys = 0;
@@ -55,7 +55,8 @@ public class PlayerHandler : MonoBehaviour
 
     public void AddKill()
     {
-        zombieKills += 1;
+        //zombieKills += 1;
+        PlayerPrefs.SetInt("ZombieKills", PlayerPrefs.GetInt("ZombieKills") + 1);
     }
 
     public void UseAmmo(int amount)
@@ -87,13 +88,14 @@ public class PlayerHandler : MonoBehaviour
 
     public void PlayerDie()
     {
-        SceneManager.LoadScene("GameOver");
         Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("GameOver");
     }
 
     void Update()
     {
         HealthBar.value = HP;
+        //PlayerPrefs.SetInt("ZombieKills", zombieKills);
 
         if (HP <= 0)
         {
