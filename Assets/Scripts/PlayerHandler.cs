@@ -15,6 +15,7 @@ public class PlayerHandler : MonoBehaviour
     public int zombieKills = 0;
 
     public int sticks = 0;
+    public int batterys = 0;
 
     public Dictionary<string, bool> Tasks;
 
@@ -23,6 +24,7 @@ public class PlayerHandler : MonoBehaviour
         Instance = this;
         Tasks = new Dictionary<string, bool>();
         Tasks.Add("Fire", false);
+        Tasks.Add("Lights", false);
     }
 
     public void CompleteTask(string task)
@@ -39,6 +41,16 @@ public class PlayerHandler : MonoBehaviour
     public void RemoveStick()
     {
         sticks -= 1;
+    }
+
+    public void AddBattery()
+    {
+        batterys += 1;
+    }
+
+    public void RemoveBattery()
+    {
+        batterys -= 1;
     }
 
     public void AddKill()
@@ -76,6 +88,7 @@ public class PlayerHandler : MonoBehaviour
     public void PlayerDie()
     {
         SceneManager.LoadScene("GameOver");
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void Update()
@@ -85,6 +98,16 @@ public class PlayerHandler : MonoBehaviour
         if (HP <= 0)
         {
             PlayerDie();
+        }
+
+        if (Tasks["Fire"] == true)
+        {
+            SceneManager.LoadScene("Level2");
+        }
+
+        if (Tasks["Lights"] == true)
+        {
+            SceneManager.LoadScene("Victory");
         }
     }
 }

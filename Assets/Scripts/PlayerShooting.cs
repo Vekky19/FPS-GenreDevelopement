@@ -43,6 +43,11 @@ public class PlayerShooting : MonoBehaviour
 
             hit.collider.GetComponent<ZombieHealth>().TakeDamage(bulletDamage);
         }
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, bulletRange) && hit.collider.tag == "HealthCrate")
+        {
+            HealthCrate crate = hit.collider.GetComponent<HealthCrate>();
+            crate.TakeDamage(1);
+        }
     }
 
     void AimDownSights()

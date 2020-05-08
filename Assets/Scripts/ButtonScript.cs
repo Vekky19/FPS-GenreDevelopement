@@ -7,7 +7,7 @@ public class ButtonScript : MonoBehaviour
 {
     public void Game_Start()
     {
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene("Level1");
     }
 
     public void Game_Credits()

@@ -11,6 +11,9 @@ TagManager:
   - Zombie
   - HeadCollider
   - Stick
+  - HealthCrate
+  - Battery
+  - Spotlight
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Zombie
   - 
   - 
   - 
