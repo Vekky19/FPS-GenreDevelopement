@@ -21,6 +21,7 @@ public class SpotlightScript : MonoBehaviour
     public void Battery()
     {
         PlayerHandler.Instance.RemoveBattery();
+        PlayerHandler.Instance.RemoveBattery();
         source.Play();
         charged = true;
         spotLight.enabled = true;
@@ -36,7 +37,6 @@ public class SpotlightScript : MonoBehaviour
                 if (PlayerHandler.Instance.batterys > 0 && charged == false)
                 {
                     spotLight = hit.collider.GetComponentInChildren<Light>();
-                    PlayerHandler.Instance.RemoveBattery();
                     Battery();
                     Debug.Log("-1 Battery");
                 }
